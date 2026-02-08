@@ -5,150 +5,53 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ReelSecrets • What They Don’t Post on YouTube</title>
   <meta name="description" content="Free sneak peeks. Premium unlocks: full videos + real details serious anglers want." />
-
   <style>
     :root{
-      --bg:#0b1220; --card:#0f1a33; --card2:#0d1730; --text:#e8edf7; --muted:#b7c0d6;
+      --bg:#0b1220; --card:#0f1a33; --text:#e8edf7; --muted:#b7c0d6;
       --line:#223152; --accent:#14b8a6; --accent2:#60a5fa; --danger:#ef4444;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius:18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35); --radius:18px;
     }
     *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-    }
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:1180px;margin:0 auto;padding:18px}
-    .card{
-      background:linear-gradient(180deg,var(--card),var(--card2));
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-    .topbar{
-      display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
-      padding:14px 10px;
-    }
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{
-      width:38px;height:38px;border-radius:12px;display:grid;place-items:center;
-      background:rgba(20,184,166,.18);
-      border:1px solid rgba(20,184,166,.35);
-      font-weight:900;
-      letter-spacing:.5px;
-    }
-    .brand h1{margin:0;font-size:18px;line-height:1.1}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
+    a{color:inherit}
+    .wrap{max-width:1100px;margin:0 auto;padding:18px}
+    .topbar{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .brand{display:flex;gap:10px;align-items:center}
+    .logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-weight:800}
+    .brand h1{font-size:18px;margin:0;line-height:1}
     .brand small{color:var(--muted)}
-    .actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-    .pill{
-      padding:7px 10px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      color:var(--muted);
-      font-size:12px;
-    }
-    .btn{
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      padding:10px 12px;
-      border-radius:14px;
-      cursor:pointer;
-      font-weight:700;
-      line-height:1;
-    }
-    .btn:hover{background:rgba(255,255,255,.08)}
-    .btn.primary{background:rgba(20,184,166,.18);border-color:rgba(20,184,166,.35)}
-    .btn.blue{background:rgba(96,165,250,.16);border-color:rgba(96,165,250,.35)}
-    .btn.danger{background:rgba(239,68,68,.14);border-color:rgba(239,68,68,.35)}
-
-    .hero{display:grid;grid-template-columns:1.35fr .95fr;gap:16px;margin-top:10px}
-    @media (max-width:900px){ .hero{grid-template-columns:1fr} }
-
-    .heroMain{padding:18px}
-    .heroMain h2{margin:0 0 10px;font-size:28px;line-height:1.15}
-    .heroMain p{margin:0;color:var(--muted);line-height:1.5}
-
-    .kpiRow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
-    @media (max-width:700px){ .kpiRow{grid-template-columns:1fr} }
-    .kpi{
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:16px;
-      padding:12px;
-      background:rgba(255,255,255,.03);
-    }
-    .kpi b{display:block;margin-bottom:4px}
-    .kpi span{color:var(--muted);font-size:13px}
-
-    .heroAside{padding:16px;display:grid;gap:12px}
-    .callout{
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:16px;
-      padding:12px;
-      background:rgba(255,255,255,.03);
-    }
-    .callout h3{margin:0 0 6px;font-size:15px}
-    .callout p{margin:0;color:var(--muted);line-height:1.45;font-size:13px}
-
-    .gridHeader{
-      display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;
-      margin-top:18px;padding:0 2px;
-    }
-    .gridHeader h3{margin:0}
-    .gridHeader p{margin:4px 0 0;color:var(--muted);font-size:13px}
-
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
-    @media (max-width:980px){ .grid{grid-template-columns:repeat(2,1fr)} }
-    @media (max-width:640px){ .grid{grid-template-columns:1fr} }
-
-    .vid{overflow:hidden}
-    .thumb{
-      position:relative;
-      height:180px;
-      background:rgba(255,255,255,.03);
-      display:grid;place-items:center;
-    }
-    .thumb video{width:100%;height:100%;object-fit:cover}
-    .badge{
-      position:absolute;top:10px;left:10px;
-      padding:6px 9px;border-radius:999px;font-size:12px;font-weight:800;
-      background:rgba(20,184,166,.20);
-      border:1px solid rgba(20,184,166,.35);
-      backdrop-filter: blur(6px);
-    }
-    .badge.locked{background:rgba(96,165,250,.18);border-color:rgba(96,165,250,.35)}
-
-    .meta{padding:14px}
-    .meta h4{margin:0 0 6px;font-size:15px}
-    .meta .sub{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12px}
-    .meta .row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
-    .price{font-weight:900}
+    .pill{border:1px solid var(--line);padding:8px 12px;border-radius:999px;color:var(--muted);background:rgba(255,255,255,.02)}
+    .btn{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);padding:10px 12px;border-radius:12px;cursor:pointer}
+    .btn.primary{background:linear-gradient(135deg,rgba(96,165,250,.25),rgba(20,184,166,.25));border-color:rgba(96,165,250,.35)}
+    .btn.danger{border-color:rgba(239,68,68,.35);color:#ffd5d5}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero{padding:22px;margin-bottom:16px}
+    .hero h2{margin:0 0 8px;font-size:34px;line-height:1.05}
+    .hero p{margin:0;color:var(--muted);max-width:860px}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:960px){.grid{grid-template-columns:420px 1fr}}
+    .panel{padding:16px}
+    label{display:block;font-size:12px;color:var(--muted);margin:10px 0 6px}
+    input,select{width:100%;padding:12px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.2);color:var(--text)}
+    .hint{font-size:12px;color:var(--muted);margin-top:6px}
+    .posts{display:grid;gap:12px}
+    .post{padding:14px}
+    .postTop{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+    .post h3{margin:0 0 6px;font-size:18px}
+    .meta{font-size:12px;color:var(--muted)}
+    .video{margin-top:10px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#000}
+    .video iframe{width:100%;height:230px;border:0;display:block}
+    .actions{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+    .price{color:#d7ffe9;border:1px solid rgba(20,184,166,.35);background:rgba(20,184,166,.08);padding:6px 10px;border-radius:999px;font-size:12px}
+    .status{font-size:12px;color:var(--muted)}
     .small{font-size:12px;color:var(--muted)}
-
-    .footer{
-      margin:26px 0 10px;
-      color:var(--muted);
-      font-size:12px;
-      display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px
-    }
-    .toast{
-      position:fixed;left:50%;transform:translateX(-50%);
-      bottom:18px;background:rgba(0,0,0,.72);
-      border:1px solid rgba(255,255,255,.16);
-      padding:10px 12px;border-radius:14px;color:var(--text);
-      display:none;max-width:92vw;z-index:9999;
-    }
-    .skeleton{
-      background:linear-gradient(90deg, rgba(255,255,255,.04), rgba(255,255,255,.08), rgba(255,255,255,.04));
-      background-size:200% 100%;
-      animation: shimmer 1.2s infinite linear;
-    }
-    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .divider{height:1px;background:var(--line);margin:12px 0}
+    .toast{margin-top:10px;font-size:13px}
+    .ok{color:#b7ffea}
+    .bad{color:#ffb7b7}
   </style>
 </head>
-
 <body>
   <div class="wrap">
     <div class="topbar">
@@ -160,349 +63,342 @@
         </div>
       </div>
 
-      <div class="actions">
-        <span class="pill" id="statusPill">Loading…</span>
-        <button class="btn" id="btnLogin">Log in</button>
-        <button class="btn blue" id="btnGoogle">Google</button>
-        <button class="btn danger" id="btnLogout" style="display:none;">Log out</button>
-        <a class="btn primary" href="#previews">Browse previews</a>
+      <div class="row">
+        <span id="firebaseStatus" class="pill">Connecting…</span>
+        <button id="loginBtn" class="btn">Log in</button>
+        <button id="logoutBtn" class="btn danger" style="display:none;">Log out</button>
       </div>
     </div>
 
-    <div class="hero">
-      <div class="card heroMain">
-        <h2>Free sneak peeks. <br/>Premium is where the real details live.</h2>
-        <p>
-          ReelSecrets is for serious anglers: creators post a short preview for free, then you unlock the full video
-          (plus the “off-YouTube” breakdown) with a purchase.
-        </p>
-
-        <div class="kpiRow">
-          <div class="kpi">
-            <b>Preview → Premium</b>
-            <span>Teaser clip is public</span>
-          </div>
-          <div class="kpi">
-            <b>Pay per video</b>
-            <span>No ads required</span>
-          </div>
-          <div class="kpi">
-            <b>Creator-first</b>
-            <span>Creators set pricing</span>
-          </div>
-        </div>
-
-        <div class="actions" style="margin-top:14px">
-          <button class="btn primary" id="btnCreateAccount">Create account</button>
-          <button class="btn" id="btnLearn">What’s “not on YouTube”?</button>
-        </div>
-
-        <p class="small" style="margin-top:12px">
-          Tip: Launch with 5–10 creators posting “insider” videos (locations, patterns, setups) and you’ll have real demand.
-        </p>
-      </div>
-
-      <div class="card heroAside">
-        <div class="callout">
-          <h3>Creator Promise</h3>
-          <p>Premium must include at least one: exact spot, pattern breakdown, full setup, timing/conditions, or tournament-level tactics.</p>
-        </div>
-
-        <div class="callout">
-          <h3>Viewer Promise</h3>
-          <p>No fluff. Premium unlocks practical details that improve results on the water.</p>
-        </div>
-
-        <div class="callout" style="background:rgba(96,165,250,.10);border-color:rgba(96,165,250,.35)">
-          <h3>Monetization</h3>
-          <p>Start with pay-per-video. Add subscriptions later (state packs, creator bundles, seasonal reports).</p>
-        </div>
+    <div class="card hero">
+      <h2>Free sneak peeks.<br/>Premium is where the real details live.</h2>
+      <p>Creators post a short preview for free. Viewers unlock the full video + the “off-YouTube” breakdown with a purchase.</p>
+      <div class="divider"></div>
+      <div class="row">
+        <span class="pill">Preview → Premium</span>
+        <span class="pill">Pay per video</span>
+        <span class="pill">Creator-first pricing</span>
       </div>
     </div>
 
-    <div class="gridHeader" id="previews">
-      <div>
-        <h3>Trending previews</h3>
-        <p>These are short public teasers pulled from Firestore (collection: <b>previews</b>).</p>
-      </div>
-      <div class="actions">
-        <button class="btn" id="btnRefresh">Refresh</button>
-      </div>
-    </div>
+    <div class="grid">
+      <!-- Creator panel -->
+      <div class="card panel">
+        <h3 style="margin:0 0 6px;">Creator posting</h3>
+        <div class="small">Testing mode: paste links (no Firebase Storage needed).</div>
 
-    <div class="grid" id="grid"></div>
+        <div id="authHint" class="toast bad" style="display:none;margin-top:10px;">
+          Please log in to post.
+        </div>
 
-    <div class="footer">
-      <div>© <span id="year"></span> ReelSecrets</div>
-      <div class="small">Firebase Hosting + Firestore (preview feed). Payments/premium unlock comes next.</div>
+        <form id="postForm" style="margin-top:8px;">
+          <label>Title</label>
+          <input id="title" placeholder="Ex: Winter Smallmouth Pattern Breakdown" required maxlength="90" />
+
+          <label>State</label>
+          <select id="state" required>
+            <option value="">Select state…</option>
+            <option>Wisconsin</option><option>Minnesota</option><option>Michigan</option><option>Illinois</option>
+            <option>Iowa</option><option>Indiana</option><option>Ohio</option><option>Missouri</option>
+            <option>Texas</option><option>Florida</option><option>California</option><option>New York</option>
+            <option>Other</option>
+          </select>
+
+          <label>Preview URL (YouTube/Vimeo)</label>
+          <input id="previewUrl" placeholder="https://www.youtube.com/watch?v=..." required />
+
+          <label>Full video URL (unlisted link)</label>
+          <input id="fullUrl" placeholder="https://www.youtube.com/watch?v=..." required />
+
+          <label>Price (USD)</label>
+          <input id="price" type="number" min="1" step="0.01" placeholder="9.99" required />
+
+          <div class="hint">Later we’ll replace this with real file uploads + verified paywall.</div>
+
+          <div class="row" style="margin-top:12px;">
+            <button id="publishBtn" class="btn primary" type="submit">Publish post</button>
+            <span id="formMsg" class="status"></span>
+          </div>
+        </form>
+      </div>
+
+      <!-- Feed panel -->
+      <div class="card panel">
+        <div class="row" style="justify-content:space-between;">
+          <div>
+            <h3 style="margin:0 0 6px;">Browse previews</h3>
+            <div class="small">Pulled live from Firestore collection: <code>posts</code></div>
+          </div>
+          <div style="min-width:220px;">
+            <label style="margin-top:0;">Filter by state</label>
+            <select id="filterState">
+              <option value="">All states</option>
+              <option>Wisconsin</option><option>Minnesota</option><option>Michigan</option><option>Illinois</option>
+              <option>Iowa</option><option>Indiana</option><option>Ohio</option><option>Missouri</option>
+              <option>Texas</option><option>Florida</option><option>California</option><option>New York</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="posts" class="posts">
+          <div class="status">Loading posts…</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="toast" id="toast"></div>
-
-  <!-- Firebase (Modular, v12.9.0) -->
+  <!-- Firebase + App -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
     import {
       getAuth,
-      onAuthStateChanged,
       GoogleAuthProvider,
+      signInWithPopup,
       signOut,
-      createUserWithEmailAndPassword,
-      signInWithEmailAndPassword,
-      signInWithRedirect,
-      getRedirectResult
-    } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
     import {
       getFirestore,
       collection,
+      addDoc,
       query,
       orderBy,
       limit,
-      getDocs
-    } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+      onSnapshot,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
+    // ✅ PASTE YOUR FIREBASE WEB APP CONFIG HERE (from Firebase Console > Project settings > Your apps)
     const firebaseConfig = {
-      apiKey: "AIzaSyCndtMlIb_Y_YCP1RO-ctfizRU6q1MGeHY",
-      authDomain: "bestfishingsecrets-932cf.firebaseapp.com",
-      projectId: "bestfishingsecrets-932cf",
-      storageBucket: "bestfishingsecrets-932cf.firebasestorage.app",
-      messagingSenderId: "387299114354",
-      appId: "1:387299114354:web:cbadda074f9dd7083ef1eb",
-      measurementId: "G-Z8L28MXNEG"
+      apiKey: "REPLACE_ME",
+      authDomain: "REPLACE_ME",
+      projectId: "REPLACE_ME",
+      storageBucket: "REPLACE_ME",
+      messagingSenderId: "REPLACE_ME",
+      appId: "REPLACE_ME"
     };
+
+    // ✅ PASTE YOUR STRIPE PAYMENT LINK HERE (testing)
+    // Example: https://buy.stripe.com/xxxxxx
+    const STRIPE_PAYMENT_LINK = "REPLACE_ME";
 
     const els = {
-      statusPill: document.getElementById("statusPill"),
-      btnLogin: document.getElementById("btnLogin"),
-      btnGoogle: document.getElementById("btnGoogle"),
-      btnLogout: document.getElementById("btnLogout"),
-      btnCreateAccount: document.getElementById("btnCreateAccount"),
-      btnLearn: document.getElementById("btnLearn"),
-      btnRefresh: document.getElementById("btnRefresh"),
-      grid: document.getElementById("grid"),
-      toast: document.getElementById("toast"),
-      year: document.getElementById("year"),
+      firebaseStatus: document.getElementById("firebaseStatus"),
+      loginBtn: document.getElementById("loginBtn"),
+      logoutBtn: document.getElementById("logoutBtn"),
+      authHint: document.getElementById("authHint"),
+      postForm: document.getElementById("postForm"),
+      publishBtn: document.getElementById("publishBtn"),
+      formMsg: document.getElementById("formMsg"),
+      title: document.getElementById("title"),
+      state: document.getElementById("state"),
+      previewUrl: document.getElementById("previewUrl"),
+      fullUrl: document.getElementById("fullUrl"),
+      price: document.getElementById("price"),
+      filterState: document.getElementById("filterState"),
+      posts: document.getElementById("posts")
     };
 
-    els.year.textContent = new Date().getFullYear();
+    function setStatusOk(msg){ els.firebaseStatus.textContent = msg; els.firebaseStatus.style.borderColor = "rgba(20,184,166,.35)"; }
+    function setStatusBad(msg){ els.firebaseStatus.textContent = msg; els.firebaseStatus.style.borderColor = "rgba(239,68,68,.35)"; }
 
-    function toast(msg){
-      els.toast.textContent = msg;
-      els.toast.style.display = "block";
-      clearTimeout(window.__t);
-      window.__t = setTimeout(()=> els.toast.style.display="none", 2400);
+    function normalizeYouTubeToEmbed(url) {
+      try {
+        const u = new URL(url);
+        // youtu.be/<id>
+        if (u.hostname.includes("youtu.be")) {
+          const id = u.pathname.replace("/", "");
+          return `https://www.youtube.com/embed/${id}`;
+        }
+        // youtube.com/watch?v=<id>
+        if (u.hostname.includes("youtube.com")) {
+          const id = u.searchParams.get("v");
+          if (id) return `https://www.youtube.com/embed/${id}`;
+          // youtube.com/embed/<id> already
+          if (u.pathname.startsWith("/embed/")) return url;
+        }
+      } catch(_) {}
+      return url; // fallback (Vimeo etc.)
+    }
+
+    function money(n){
+      const num = Number(n);
+      if (Number.isFinite(num)) return `$${num.toFixed(2)}`;
+      return "$—";
     }
 
     function escapeHtml(s){
-      return String(s ?? "").replace(/[&<>"']/g, c => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-      }[c]));
+      return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
     }
 
-    function skeletonCards(n=6){
-      els.grid.innerHTML = "";
-      for(let i=0;i<n;i++){
-        const d = document.createElement("div");
-        d.className = "card vid";
-        d.innerHTML = `
-          <div class="thumb skeleton"></div>
-          <div class="meta">
-            <div class="skeleton" style="height:14px;border-radius:10px;width:72%;"></div>
-            <div style="height:10px"></div>
-            <div class="skeleton" style="height:10px;border-radius:10px;width:56%;"></div>
-            <div style="height:12px"></div>
-            <div class="skeleton" style="height:36px;border-radius:12px;width:100%;"></div>
-          </div>
-        `;
-        els.grid.appendChild(d);
+    // Init
+    let app, auth, db, currentUser = null;
+
+    try {
+      app = initializeApp(firebaseConfig);
+      auth = getAuth(app);
+      db = getFirestore(app);
+      setStatusOk("Connected to Firebase");
+    } catch (e) {
+      console.error(e);
+      setStatusBad("Firebase config missing");
+    }
+
+    // Auth UI
+    const provider = new GoogleAuthProvider();
+
+    els.loginBtn.addEventListener("click", async () => {
+      try {
+        await signInWithPopup(auth, provider);
+      } catch (e) {
+        alert("Login failed. If you're on GitHub Pages, add russellberzinski.github.io to Firebase Auth > Authorized domains.");
+        console.error(e);
       }
-    }
+    });
 
-    function renderCards(items){
-      els.grid.innerHTML = "";
-      if (!items.length){
-        els.grid.innerHTML = `<div class="small" style="color:var(--muted)">No previews yet. Add docs to Firestore collection <b>previews</b>.</div>`;
+    els.logoutBtn.addEventListener("click", async () => {
+      await signOut(auth);
+    });
+
+    onAuthStateChanged(auth, (user) => {
+      currentUser = user;
+      if (user) {
+        els.loginBtn.style.display = "none";
+        els.logoutBtn.style.display = "inline-block";
+        els.authHint.style.display = "none";
+      } else {
+        els.loginBtn.style.display = "inline-block";
+        els.logoutBtn.style.display = "none";
+      }
+    });
+
+    // Create post
+    els.postForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!currentUser) {
+        els.authHint.style.display = "block";
         return;
       }
 
-      items.forEach(item => {
-        const title = escapeHtml(item.title || "Untitled Preview");
-        const creator = escapeHtml(item.creatorName || "Creator");
-        const state = escapeHtml(item.state || "—");
-        const species = escapeHtml(item.species || "—");
-        const price = Number(item.price || 0).toFixed(2);
-        const previewUrl = item.previewUrl || "";
-        const locked = item.isPremium === true;
+      const payload = {
+        title: els.title.value.trim(),
+        state: els.state.value.trim(),
+        previewUrl: els.previewUrl.value.trim(),
+        fullUrl: els.fullUrl.value.trim(),
+        price: Number(els.price.value),
+        creatorUid: currentUser.uid,
+        creatorName: currentUser.displayName || "Creator",
+        createdAt: serverTimestamp()
+      };
 
-        const card = document.createElement("div");
-        card.className = "card vid";
+      if (!payload.title || !payload.state || !payload.previewUrl || !payload.fullUrl || !Number.isFinite(payload.price)) {
+        els.formMsg.textContent = "Please fill all fields.";
+        return;
+      }
 
-        card.innerHTML = `
-          <div class="thumb">
-            <div class="badge ${locked ? "locked" : ""}">${locked ? "Premium Unlock" : "Preview"}</div>
-            ${
-              previewUrl
-                ? `<video src="${escapeHtml(previewUrl)}" muted playsinline preload="metadata"></video>`
-                : `<div class="small" style="color:var(--muted)">No previewUrl provided</div>`
-            }
-          </div>
-          <div class="meta">
-            <h4>${title}</h4>
-            <div class="sub">
-              <span>By <b>${creator}</b></span>
-              <span>•</span>
-              <span>${state}</span>
-              <span>•</span>
-              <span>${species}</span>
+      els.publishBtn.disabled = true;
+      els.formMsg.textContent = "Publishing…";
+
+      try {
+        await addDoc(collection(db, "posts"), payload);
+        els.formMsg.textContent = "✅ Published!";
+        els.postForm.reset();
+      } catch (err) {
+        console.error(err);
+        els.formMsg.textContent = "❌ Publish failed (check Firestore rules).";
+      } finally {
+        els.publishBtn.disabled = false;
+        setTimeout(() => (els.formMsg.textContent = ""), 2500);
+      }
+    });
+
+    // Render feed
+    let unsubscribe = null;
+
+    function renderPosts(docs) {
+      const filter = els.filterState.value;
+      const filtered = filter ? docs.filter(d => (d.data().state || "") === filter) : docs;
+
+      if (filtered.length === 0) {
+        els.posts.innerHTML = `<div class="status">No posts yet.</div>`;
+        return;
+      }
+
+      els.posts.innerHTML = filtered.map((doc) => {
+        const d = doc.data();
+        const title = escapeHtml(d.title || "Untitled");
+        const state = escapeHtml(d.state || "—");
+        const price = money(d.price);
+        const creator = escapeHtml(d.creatorName || "Creator");
+        const embed = normalizeYouTubeToEmbed(d.previewUrl || "");
+        const fullUrl = d.fullUrl || "";
+        const id = doc.id;
+
+        return `
+          <div class="card post">
+            <div class="postTop">
+              <div>
+                <h3>${title}</h3>
+                <div class="meta">${state} • by ${creator}</div>
+              </div>
+              <div class="price">${price}</div>
             </div>
 
-            <div class="row">
-              <div class="price">${locked ? "$" + price : "Free"}</div>
-              <button class="btn ${locked ? "primary" : ""}" data-action="${locked ? "unlock" : "watch"}">
-                ${locked ? "Unlock" : "Watch preview"}
-              </button>
+            <div class="video">
+              <iframe src="${escapeHtml(embed)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
-            <div class="small" style="margin-top:10px">
-              ${locked ? "Includes: full video + off-YouTube breakdown" : "Public teaser clip"}
+            <div class="actions">
+              <button class="btn primary" data-unlock="${escapeHtml(id)}">Unlock premium</button>
+              <span class="status">You’ll be redirected to payment.</span>
             </div>
+
+            <input type="hidden" id="full_${escapeHtml(id)}" value="${escapeHtml(fullUrl)}" />
           </div>
         `;
+      }).join("");
 
-        const video = card.querySelector("video");
-        if (video){
-          card.addEventListener("mouseenter", () => { video.play().catch(()=>{}); });
-          card.addEventListener("mouseleave", () => { video.pause(); video.currentTime = 0; });
-          card.addEventListener("touchstart", () => { video.play().catch(()=>{}); }, {passive:true});
-        }
+      // Unlock handlers
+      document.querySelectorAll("[data-unlock]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-unlock");
+          const full = document.getElementById(`full_${id}`)?.value || "";
 
-        card.querySelector("button")?.addEventListener("click", () => {
-          if (locked){
-            toast("Next step: add payments + premium unlock (Stripe).");
-          } else {
-            toast("Preview playback is inline. Upload more previews to Firestore.");
+          if (!STRIPE_PAYMENT_LINK || STRIPE_PAYMENT_LINK === "REPLACE_ME") {
+            alert("Add your Stripe Payment Link URL into STRIPE_PAYMENT_LINK in index.html first.");
+            return;
           }
-        });
 
-        els.grid.appendChild(card);
+          // Store what to reveal after payment (testing approach)
+          localStorage.setItem("reelsecrets_fullUrl", full);
+          localStorage.setItem("reelsecrets_postId", id);
+          localStorage.setItem("reelsecrets_paidAt", String(Date.now()));
+
+          // Send to Stripe Payment Link
+          window.location.href = STRIPE_PAYMENT_LINK;
+        });
       });
     }
 
-    const demo = [
-      { title:"Ice Edge Walleyes (Teaser)", creatorName:"NorthWoods Angler", state:"WI", species:"Walleye", isPremium:false, previewUrl:"" },
-      { title:"Dock Skipping Bass (Premium)", creatorName:"LakePro", state:"MN", species:"Largemouth", isPremium:true, price:4.99, previewUrl:"" },
-      { title:"River Smallies Pattern (Premium)", creatorName:"CurrentKings", state:"IA", species:"Smallmouth", isPremium:true, price:6.00, previewUrl:"" },
-    ];
-
-    // Init Firebase once
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    function isMobile(){
-      return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    function startFeed() {
+      const q = query(collection(db, "posts"), orderBy("createdAt", "desc"), limit(50));
+      unsubscribe = onSnapshot(q, (snap) => renderPosts(snap.docs), (err) => {
+        console.error(err);
+        els.posts.innerHTML = `<div class="toast bad">Could not load posts. Check Firestore rules and that Firestore is enabled.</div>`;
+      });
     }
 
-    async function loadPreviews(){
-      skeletonCards(6);
-
-      try{
-        els.statusPill.textContent = "Connected to Firebase";
-        const q = query(collection(db, "previews"), orderBy("createdAt", "desc"), limit(12));
-        const snap = await getDocs(q);
-        const items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-        renderCards(items);
-      } catch (e){
-        console.error(e);
-        renderCards(demo);
-        els.statusPill.textContent = "Firestore error (rules/index?)";
-        toast("Could not load Firestore previews. Check Firestore rules + createdAt field.");
-      }
-    }
-
-    async function handleRedirect(){
-      try{
-        const res = await getRedirectResult(auth);
-        if (res?.user) toast("Logged in with Google.");
-      } catch (e){
-        // ignore if no redirect result
-      }
-    }
-
-    async function emailLoginFlow(){
-      const email = prompt("Email:");
-      if (!email) return;
-      const pass = prompt("Password (6+ chars):");
-      if (!pass) return;
-
-      try{
-        await signInWithEmailAndPassword(auth, email, pass);
-        toast("Logged in.");
-      } catch (e){
-        if (String(e?.code).includes("auth/user-not-found")){
-          try{
-            await createUserWithEmailAndPassword(auth, email, pass);
-            toast("Account created & logged in.");
-          } catch (e2){
-            console.error(e2);
-            toast(e2?.message || "Could not create account.");
-          }
-        } else {
-          console.error(e);
-          toast(e?.message || "Login failed.");
-        }
-      }
-    }
-
-    async function googleLogin(){
-      try{
-        const provider = new GoogleAuthProvider();
-        // Redirect is most reliable on mobile (and fine everywhere)
-        await signInWithRedirect(auth, provider);
-      } catch (e){
-        console.error(e);
-        toast(e?.message || "Google login failed.");
-      }
-    }
-
-    async function logout(){
-      try{
-        await signOut(auth);
-        toast("Logged out.");
-      } catch (e){
-        console.error(e);
-        toast("Logout failed.");
-      }
-    }
-
-    onAuthStateChanged(auth, (user) => {
-      if (user){
-        els.btnLogin.style.display = "none";
-        els.btnGoogle.style.display = "none";
-        els.btnLogout.style.display = "inline-flex";
-        els.statusPill.textContent = `Logged in: ${user.email || "Google user"}`;
-      } else {
-        els.btnLogin.style.display = "inline-flex";
-        els.btnGoogle.style.display = "inline-flex";
-        els.btnLogout.style.display = "none";
-        els.statusPill.textContent = "Connected to Firebase";
-      }
+    els.filterState.addEventListener("change", () => {
+      // simplest: rerender by pulling current DOM from last snapshot
+      // (we keep it easy: just reload page to reapply filter if needed)
+      // Better: store last docs in memory.
+      window.location.reload();
     });
 
-    els.btnLogin.addEventListener("click", emailLoginFlow);
-    els.btnCreateAccount.addEventListener("click", emailLoginFlow);
-    els.btnGoogle.addEventListener("click", googleLogin);
-    els.btnLogout.addEventListener("click", logout);
-    els.btnRefresh.addEventListener("click", loadPreviews);
-
-    els.btnLearn.addEventListener("click", () => {
-      toast("Premium = full video + details creators avoid posting on YouTube (spots, patterns, setups, timing).");
-    });
-
-    // Start
-    handleRedirect();
-    loadPreviews();
+    startFeed();
   </script>
 </body>
 </html>
