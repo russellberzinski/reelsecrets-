@@ -10,98 +10,115 @@
     h1{margin:0;font-size:18px}
     .wrap{max-width:900px;margin:0 auto;padding:16px}
     .status{padding:10px 12px;border:1px solid #223152;border-radius:12px;background:#0f1a33;margin-bottom:12px;color:#b7c0d6}
+    .row{display:flex;gap:10px;margin-bottom:12px}
+    button{padding:10px 14px;border-radius:10px;border:1px solid #223152;background:#0f1a33;color:#e8edf7;cursor:pointer}
+    button:hover{background:#13204a}
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
     .card{border:1px solid #223152;border-radius:16px;background:#0f1a33;padding:14px}
     .title{font-weight:700;margin:0 0 6px;font-size:16px}
     .meta{color:#b7c0d6;font-size:13px;margin:0 0 10px}
     .price{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid #223152;background:#0b1220;font-weight:700}
-    a{color:#60a5fa;text-decoration:none}
-    a:hover{text-decoration:underline}
-    .err{white-space:pre-wrap;color:#fecaca}
   </style>
 </head>
 <body>
   <header><h1>BestFishingSecrets — Firestore Test Feed</h1></header>
+
   <div class="wrap">
-    <div id="status" class="status">Loading posts…</div>
+    <div id="status" class="status">Loading…</div>
+
+    <div class="row">
+      <button id="reloadBtn">Reload Posts</button>
+      <button id="addBtn">Create Test Post</button>
+    </div>
+
     <div id="grid" class="grid"></div>
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    import {
+      getFirestore,
+      collection,
+      getDocs,
+      addDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
-    // ✅ PASTE YOUR firebaseConfig BELOW (Project Settings → Your apps → Web)
+    // Your exact Firebase config
     const firebaseConfig = {
-      apiKey: "PASTE_YOURS",
-      authDomain: "PASTE_YOURS",
-      projectId: "PASTE_YOURS",
-      storageBucket: "PASTE_YOURS",
-      messagingSenderId: "PASTE_YOURS",
-      appId: "PASTE_YOURS"
+      apiKey: "AIzaSyCndtMlIb_Y_YCP1RO-ctfizRU6q1MGeHY",
+      authDomain: "bestfishingsecrets-932cf.firebaseapp.com",
+      projectId: "bestfishingsecrets-932cf",
+      storageBucket: "bestfishingsecrets-932cf.firebasestorage.app",
+      messagingSenderId: "387299114354",
+      appId: "1:387299114354:web:cbadda074f9dd7083ef1eb",
+      measurementId: "G-Z8L28MXNEG"
     };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
     const statusEl = document.getElementById("status");
     const gridEl = document.getElementById("grid");
 
-    function cardHTML(p) {
-      const title = p.Title ?? "(No Title field found)";
-      const state = p.State ?? "(No State field found)";
-      const price = (typeof p.price === "number") ? p.price.toFixed(2) : (p.price ?? "—");
-      const previewUrl = p.previewUrl ?? "";
-      const fullUrl = p.fullUrl ?? "";
+    function renderCard(p) {
+      const title = p.title || "Untitled Catch";
+      const state = p.state || "Unknown";
+      const price = p.price || "0";
 
       return `
         <div class="card">
-          <p class="title">${escapeHtml(String(title))}</p>
-          <p class="meta">State: <b>${escapeHtml(String(state))}</b></p>
-          <p class="meta"><span class="price">$${escapeHtml(String(price))}</span></p>
-          ${previewUrl ? `<p class="meta"><a href="${escapeAttr(previewUrl)}" target="_blank" rel="noopener">Preview link</a></p>` : ""}
-          ${fullUrl ? `<p class="meta"><a href="${escapeAttr(fullUrl)}" target="_blank" rel="noopener">Full link</a></p>` : ""}
+          <p class="title">${title}</p>
+          <p class="meta">State: <b>${state}</b></p>
+          <p class="meta"><span class="price">$${price}</span></p>
         </div>
       `;
     }
 
-    function escapeHtml(s){
-      return s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
-    }
-    function escapeAttr(s){ return escapeHtml(s); }
-
     async function loadPosts() {
-      try {
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+      statusEl.textContent = "Loading posts…";
+      gridEl.innerHTML = "";
 
-        // Flat structure: posts/{postId}
-        // If you don't have createdAt, orderBy will fail — so we try without it first.
-        let snap;
-        try {
-          const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
-          snap = await getDocs(q);
-        } catch (e) {
-          // fallback: no ordering
-          snap = await getDocs(collection(db, "posts"));
-        }
+      try {
+        const snap = await getDocs(collection(db, "posts"));
 
         if (snap.empty) {
-          statusEl.textContent = "No posts found in Firestore collection: posts";
+          statusEl.textContent = "No posts yet. Click 'Create Test Post'.";
           return;
         }
 
-        statusEl.textContent = `Loaded ${snap.size} post(s)`;
         let html = "";
         snap.forEach(doc => {
-          const data = doc.data();
-          html += cardHTML(data);
-          console.log("Post:", doc.id, data);
+          html += renderCard(doc.data());
         });
+
         gridEl.innerHTML = html;
+        statusEl.textContent = `Loaded ${snap.size} post(s).`;
       } catch (err) {
-        console.error("Firestore load error:", err);
-        statusEl.innerHTML = `❌ Error loading posts. Open your browser console for details.\n\nCommon causes:\n- Firestore Rules block read\n- Wrong firebaseConfig / projectId\n- Collection name mismatch\n\nActual error:\n${String(err?.message || err)}`;
-        statusEl.classList.add("err");
+        console.error(err);
+        statusEl.textContent = "Error loading posts. Check Firestore rules.";
       }
     }
+
+    async function createTestPost() {
+      try {
+        await addDoc(collection(db, "posts"), {
+          title: "Test Bass Catch",
+          state: "Wisconsin",
+          price: 9.99,
+          createdAt: serverTimestamp()
+        });
+
+        statusEl.textContent = "Test post created.";
+        loadPosts();
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = "Error creating post. Check Firestore rules.";
+      }
+    }
+
+    document.getElementById("reloadBtn").onclick = loadPosts;
+    document.getElementById("addBtn").onclick = createTestPost;
 
     loadPosts();
   </script>
