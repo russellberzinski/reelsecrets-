@@ -1,3 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ReelSecrets • What They Don’t Post on YouTube</title>
+  <meta name="description" content="Free sneak peeks. Premium unlocks: full videos + real details serious anglers want." />
+  <style>
+    :root{
+      --bg:#0b1220; --card:#0f1a33; --card2:#0d1730; --text:#e8edf7; --muted:#b7c0d6;
+      --line:#223152; --accent:#14b8a6; --accent2:#60a5fa; --danger:#ef4444;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1180px;margin:0 auto;padding:18px}
+    .card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:14px 10px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(20,184,166,.18);border:1px solid rgba(20,184,166,.35);font-weight:900}
+    .brand h1{margin:0;font-size:18px;line-height:1.1}
+    .brand small{color:var(--muted)}
+    .actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .pill{padding:7px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.12);color:var(--muted);font-size:12px}
+    .btn{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:var(--text);padding:10px 12px;border-radius:14px;cursor:pointer;font-weight:700}
+    .btn:hover{background:rgba(255,255,255,.08)}
+    .btn.primary{background:rgba(20,184,166,.18);border-color:rgba(20,184,166,.35)}
+    .btn.blue{background:rgba(96,165,250,.16);border-color:rgba(96,165,250,.35)}
+    .btn.danger{background:rgba(239,68,68,.14);border-color:rgba(239,68,68,.35)}
+    .hero{display:grid;grid-template-columns:1.35fr .95fr;gap:16px;margin-top:10px}
+    @media (max-width: 900px){ .hero{grid-template-columns:1fr} }
+    .heroMain{padding:18px}
+    .heroMain h2{margin:0 0 10px;font-size:28px;line-height:1.15}
+    .heroMain p{margin:0;color:var(--muted);line-height:1.5}
+    .kpiRow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+    @media (max-width: 700px){ .kpiRow{grid-template-columns:1fr} }
+    .kpi{border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;background:rgba(255,255,255,.03)}
+    .kpi b{display:block;margin-bottom:4px}
+    .kpi span{color:var(--muted);font-size:13px}
+    .heroAside{padding:16px;display:grid;gap:12px}
+    .callout{border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;background:rgba(255,255,255,.03)}
+    .callout h3{margin:0 0 6px;font-size:15px}
+    .callout p{margin:0;color:var(--muted);line-height:1.45;font-size:13px}
+    .gridHeader{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:18px;padding:0 2px}
+    .gridHeader h3{margin:0}
+    .gridHeader p{margin:4px 0 0;color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+    @media (max-width: 980px){ .grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width: 640px){ .grid{grid-template-columns:1fr} }
+    .vid{overflow:hidden}
+    .thumb{position:relative;height:180px;background:rgba(255,255,255,.03);display:grid;place-items:center}
+    .thumb video{width:100%;height:100%;object-fit:cover}
+    .badge{position:absolute;top:10px;left:10px;padding:6px 9px;border-radius:999px;font-size:12px;font-weight:800;background:rgba(20,184,166,.20);border:1px solid rgba(20,184,166,.35)}
+    .badge.locked{background:rgba(96,165,250,.18);border-color:rgba(96,165,250,.35)}
     .meta{padding:14px}
     .meta h4{margin:0 0 6px;font-size:15px}
     .meta .sub{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12px}
@@ -31,7 +87,7 @@
       </div>
 
       <div class="actions">
-        <span class="pill" id="statusPill">Offline Mode</span>
+        <span class="pill" id="statusPill">Loading…</span>
         <button class="btn" id="btnLogin">Log in</button>
         <button class="btn blue" id="btnGoogle">Google</button>
         <button class="btn danger" id="btnLogout" style="display:none;">Log out</button>
@@ -62,7 +118,7 @@
           </div>
         </div>
 
-        <div class="actions">
+        <div class="actions" style="margin-top:14px">
           <button class="btn primary" id="btnCreateAccount">Create account</button>
           <button class="btn" id="btnLearn">What’s “not on YouTube”?</button>
         </div>
@@ -99,9 +155,7 @@
       </div>
     </div>
 
-    <div class="grid" id="grid">
-      <!-- Cards injected here -->
-    </div>
+    <div class="grid" id="grid"></div>
 
     <div class="footer">
       <div>© <span id="year"></span> ReelSecrets</div>
@@ -111,18 +165,18 @@
 
   <div class="toast" id="toast"></div>
 
-  <!-- Firebase (Modular v9+) -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
     import {
       getAuth,
       onAuthStateChanged,
-      signInWithPopup,
       GoogleAuthProvider,
       signOut,
       createUserWithEmailAndPassword,
-      signInWithEmailAndPassword
-    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+      signInWithEmailAndPassword,
+      signInWithRedirect,
+      getRedirectResult
+    } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
     import {
       getFirestore,
       collection,
@@ -130,20 +184,18 @@
       orderBy,
       limit,
       getDocs
-    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 
-    // ✅ STEP 1: Paste your Firebase web app config here (from Firebase Console → Project settings → Your apps)
+    // ✅ Your real Firebase config (only one config in the whole file)
     const firebaseConfig = {
-      apiKey: "PASTE_YOUR_API_KEY",
-      authDomain: "PASTE_YOUR_AUTH_DOMAIN",
-      projectId: "PASTE_YOUR_PROJECT_ID",
-      storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
-      messagingSenderId: "PASTE_YOUR_SENDER_ID",
-      appId: "PASTE_YOUR_APP_ID"
+      apiKey: "AIzaSyCndtMlIb_Y_YCP1RO-ctfizRU6q1MGeHY",
+      authDomain: "bestfishingsecrets-932cf.firebaseapp.com",
+      projectId: "bestfishingsecrets-932cf",
+      storageBucket: "bestfishingsecrets-932cf.firebasestorage.app",
+      messagingSenderId: "387299114354",
+      appId: "1:387299114354:web:cbadda074f9dd7083ef1eb",
+      measurementId: "G-Z8L28MXNEG"
     };
-
-    // If config not set, page still works with demo cards.
-    const configLooksReal = !Object.values(firebaseConfig).some(v => String(v).includes("PASTE_"));
 
     const els = {
       statusPill: document.getElementById("statusPill"),
@@ -243,7 +295,6 @@
           </div>
         `;
 
-        // Video hover play (nice polish)
         const video = card.querySelector("video");
         if (video){
           card.addEventListener("mouseenter", () => { video.play().catch(()=>{}); });
@@ -251,7 +302,6 @@
           card.addEventListener("touchstart", () => { video.play().catch(()=>{}); }, {passive:true});
         }
 
-        // Button action placeholder
         card.querySelector("button")?.addEventListener("click", () => {
           if (locked){
             toast("Next step: add payments + premium unlock (Stripe).");
@@ -264,67 +314,54 @@
       });
     }
 
-    // Demo fallback (if Firebase config isn’t pasted yet)
     const demo = [
       { title:"Ice Edge Walleyes (Teaser)", creatorName:"NorthWoods Angler", state:"WI", species:"Walleye", isPremium:false, previewUrl:"" },
       { title:"Dock Skipping Bass (Premium)", creatorName:"LakePro", state:"MN", species:"Largemouth", isPremium:true, price:4.99, previewUrl:"" },
       { title:"River Smallies Pattern (Premium)", creatorName:"CurrentKings", state:"IA", species:"Smallmouth", isPremium:true, price:6.00, previewUrl:"" },
     ];
 
-    let app, auth, db;
+    // Initialize Firebase once
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    function isMobile(){
+      return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
 
     async function loadPreviews(){
       skeletonCards(6);
 
-      if (!configLooksReal){
-        // No Firebase config yet → show demo cards
-        setTimeout(()=> renderCards(demo), 250);
-        els.statusPill.textContent = "Paste Firebase config to go live";
-        return;
-      }
-
       try{
-        app = initializeApp(firebaseConfig);
-        auth = getAuth(app);
-        db = getFirestore(app);
-
         els.statusPill.textContent = "Connected to Firebase";
 
-        // Pull newest previews
         const q = query(collection(db, "previews"), orderBy("createdAt", "desc"), limit(12));
         const snap = await getDocs(q);
         const items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
         renderCards(items);
 
-        // Watch auth state
-        onAuthStateChanged(auth, (user) => {
-          if (user){
-            els.btnLogin.style.display = "none";
-            els.btnGoogle.style.display = "none";
-            els.btnLogout.style.display = "inline-flex";
-            els.statusPill.textContent = `Logged in: ${user.email || "Google user"}`;
-          } else {
-            els.btnLogin.style.display = "inline-flex";
-            els.btnGoogle.style.display = "inline-flex";
-            els.btnLogout.style.display = "none";
-            if (configLooksReal) els.statusPill.textContent = "Connected to Firebase";
-          }
-        });
-
       } catch (e){
         console.error(e);
         renderCards(demo);
-        els.statusPill.textContent = "Firebase error (check config)";
-        toast("Firebase error — check your config in index.html");
+        els.statusPill.textContent = "Firestore error (rules/index?)";
+        toast("Could not load Firestore previews. Check rules + createdAt field.");
       }
     }
 
-    // Auth UI (simple prompts so it works on mobile with zero extra pages)
-    async function emailLoginFlow(){
-      if (!auth){
-        toast("Paste Firebase config first.");
-        return;
+    // Handle Google redirect result (mobile)
+    async function handleRedirect(){
+      try{
+        const res = await getRedirectResult(auth);
+        if (res?.user){
+          toast("Logged in with Google.");
+        }
+      } catch (e){
+        console.error(e);
+        // ignore if no redirect happened
       }
+    }
+
+    async function emailLoginFlow(){
       const email = prompt("Email:");
       if (!email) return;
       const pass = prompt("Password (6+ chars):");
@@ -334,7 +371,6 @@
         await signInWithEmailAndPassword(auth, email, pass);
         toast("Logged in.");
       } catch (e){
-        // If user doesn't exist, create them (simple onboarding)
         if (String(e?.code).includes("auth/user-not-found")){
           try{
             await createUserWithEmailAndPassword(auth, email, pass);
@@ -351,14 +387,17 @@
     }
 
     async function googleLogin(){
-      if (!auth){
-        toast("Paste Firebase config first.");
-        return;
-      }
       try{
         const provider = new GoogleAuthProvider();
-        await signInWithPopup(auth, provider);
-        toast("Logged in with Google.");
+
+        // Popups often fail on phones — redirect is more reliable.
+        if (isMobile()){
+          await signInWithRedirect(auth, provider);
+          return;
+        }
+
+        // Desktop could use popup, but to keep this file minimal we use redirect everywhere if you prefer:
+        await signInWithRedirect(auth, provider);
       } catch (e){
         console.error(e);
         toast(e?.message || "Google login failed.");
@@ -366,10 +405,28 @@
     }
 
     async function logout(){
-      if (!auth) return;
-      await signOut(auth);
-      toast("Logged out.");
+      try{
+        await signOut(auth);
+        toast("Logged out.");
+      } catch (e){
+        console.error(e);
+        toast("Logout failed.");
+      }
     }
+
+    onAuthStateChanged(auth, (user) => {
+      if (user){
+        els.btnLogin.style.display = "none";
+        els.btnGoogle.style.display = "none";
+        els.btnLogout.style.display = "inline-flex";
+        els.statusPill.textContent = `Logged in: ${user.email || "Google user"}`;
+      } else {
+        els.btnLogin.style.display = "inline-flex";
+        els.btnGoogle.style.display = "inline-flex";
+        els.btnLogout.style.display = "none";
+        els.statusPill.textContent = "Connected to Firebase";
+      }
+    });
 
     els.btnLogin.addEventListener("click", emailLoginFlow);
     els.btnCreateAccount.addEventListener("click", emailLoginFlow);
@@ -382,29 +439,8 @@
     });
 
     // Start
+    handleRedirect();
     loadPreviews();
   </script>
 </body>
-</html><script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyCndtMlIb_Y_YCP1RO-ctfizRU6q1MGeHY",
-    authDomain: "bestfishingsecrets-932cf.firebaseapp.com",
-    projectId: "bestfishingsecrets-932cf",
-    storageBucket: "bestfishingsecrets-932cf.firebasestorage.app",
-    messagingSenderId: "387299114354",
-    appId: "1:387299114354:web:cbadda074f9dd7083ef1eb",
-    measurementId: "G-Z8L28MXNEG"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
+</html>
