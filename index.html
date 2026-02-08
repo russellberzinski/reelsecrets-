@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ReelSecrets • What They Don’t Post on YouTube</title>
+  <meta name="description" content="Free sneak peeks. Premium unlocks: full videos + real details serious anglers want." />
+  <style>
+    :root{
+      --bg:#0b1220; --card:#0f1a33; --card2:#0d1730; --text:#e8edf7; --muted:#b7c0d6;
+      --line:#223152; --accent:#14b8a6; --accent2:#60a5fa; --danger:#ef4444;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:radial-gradient(1200px 700px at 20% 0%, #182a5b 0%, var(--bg) 45%, #070b14 100%);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1200px;margin:0 auto;padding:24px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:40px;height:40px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:var(--shadow);
+      display:grid;place-items:center;font-weight:900;color:#06101c
+    }
+    .brand h1{font-size:16px;margin:0;letter-spacing:.3px}
+    .brand small{display:block;color:var(--muted);font-weight:500;margin-top:2px}
+    .actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .btn{
+      border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--text);
+      padding:10px 14px;border-radius:12px;cursor:pointer; font-weight:700;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn.primary{background:linear-gradient(135deg,var(--accent),#22c55e); border:none; color:#041015}
+    .btn.blue{background:linear-gradient(135deg,var(--accent2),#a78bfa); border:none; color:#06101c}
+    .btn.danger{background:rgba(239,68,68,.12); border:1px solid rgba(239,68,68,.35); color:#fecaca}
+    .pill{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:rgba(255,255,255,.02)}
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:stretch;margin-top:18px}
+    @media (max-width: 920px){ .hero{grid-template-columns:1fr} }
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .heroMain{padding:22px}
+    .heroMain h2{margin:0 0 8px;font-size:34px;line-height:1.1;letter-spacing:-.4px}
+    .heroMain p{margin:0 0 16px;color:var(--muted);font-size:15px;line-height:1.6}
+    .kpiRow{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 18px}
+    .kpi{border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:rgba(0,0,0,.15)}
+    .kpi b{display:block;font-size:16px}
+    .kpi span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+    .heroAside{padding:18px;display:flex;flex-direction:column;gap:12px}
+    .callout{background:rgba(20,184,166,.10);border:1px solid rgba(20,184,166,.35);padding:14px;border-radius:16px}
+    .callout h3{margin:0 0 6px;font-size:14px}
+    .callout p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+    .gridHeader{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-top:22px}
+    .gridHeader h3{margin:0;font-size:18px}
+    .gridHeader p{margin:0;color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+    @media (max-width: 1020px){ .grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width: 640px){ .grid{grid-template-columns:1fr} }
+    .vid{overflow:hidden}
+    .thumb{
+      height:180px;background:linear-gradient(135deg,#0b2442,#132b57);border-bottom:1px solid var(--line);
+      display:grid;place-items:center;position:relative
+    }
+    .thumb video{width:100%;height:100%;object-fit:cover;display:block}
+    .badge{
+      position:absolute;left:12px;top:12px;font-size:12px;font-weight:800;
+      background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.15);padding:6px 10px;border-radius:999px
+    }
+    .badge.locked{background:rgba(20,184,166,.18);border-color:rgba(20,184,166,.35)}
+    .meta{padding:14px}
+    .meta h4{margin:0 0 6px;font-size:15px}
+    .meta .sub{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12px}
+    .meta .row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
+    .price{font-weight:900}
+    .small{font-size:12px;color:var(--muted)}
+    .footer{margin:26px 0 10px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    .toast{
+      position:fixed;left:50%;transform:translateX(-50%);
+      bottom:18px;background:rgba(0,0,0,.72);border:1px solid rgba(255,255,255,.16);
+      padding:10px 12px;border-radius:14px;color:var(--text);display:none;max-width:92vw
+    }
+    .skeleton{
+      background:linear-gradient(90deg, rgba(255,255,255,.04), rgba(255,255,255,.08), rgba(255,255,255,.04));
+      background-size:200% 100%;
+      animation: shimmer 1.2s infinite linear;
+    }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">RS</div>
+        <div>
+          <h1>ReelSecrets</h1>
+          <small>What They Don’t Post on YouTube</small>
+        </div>
+      </div>
+
+      <div class="actions">
+        <span class="pill" id="statusPill">Offline Mode</span>
+        <button class="btn" id="btnLogin">Log in</button>
+        <button class="btn blue" id="btnGoogle">Google</button>
+        <button class="btn danger" id="btnLogout" style="display:none;">Log out</button>
+        <a class="btn primary" href="#previews">Browse previews</a>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="card heroMain">
+        <h2>Free sneak peeks. <br/>Premium is where the real details live.</h2>
+        <p>
+          ReelSecrets is for serious anglers: creators post a short preview for free, then you unlock the full video
+          (plus the “off-YouTube” breakdown) with a purchase.
+        </p>
+
+        <div class="kpiRow">
+          <div class="kpi">
+            <b>Preview → Premium</b>
+            <span>Teaser clip is public</span>
+          </div>
+          <div class="kpi">
+            <b>Pay per video</b>
+            <span>No ads required</span>
+          </div>
+          <div class="kpi">
+            <b>Creator-first</b>
+            <span>Creators set pricing</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" id="btnCreateAccount">Create account</button>
+          <button class="btn" id="btnLearn">What’s “not on YouTube”?</button>
+        </div>
+        <p class="small" style="margin-top:12px">
+          Tip: Launch with 5–10 creators posting “insider” videos (locations, patterns, setups) and you’ll have real demand.
+        </p>
+      </div>
+
+      <div class="card heroAside">
+        <div class="callout">
+          <h3>Creator Promise</h3>
+          <p>Premium must include at least one: exact spot, pattern breakdown, full setup, timing/conditions, or tournament-level tactics.</p>
+        </div>
+
+        <div class="callout">
+          <h3>Viewer Promise</h3>
+          <p>No fluff. Premium unlocks practical details that improve results on the water.</p>
+        </div>
+
+        <div class="callout" style="background:rgba(96,165,250,.10);border-color:rgba(96,165,250,.35)">
+          <h3>Monetization</h3>
+          <p>Start with pay-per-video. Add subscriptions later (state packs, creator bundles, seasonal reports).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gridHeader" id="previews">
+      <div>
+        <h3>Trending previews</h3>
+        <p>These are short public teasers pulled from Firestore (collection: <b>previews</b>).</p>
+      </div>
+      <div class="actions">
+        <button class="btn" id="btnRefresh">Refresh</button>
+      </div>
+    </div>
+
+    <div class="grid" id="grid">
+      <!-- Cards injected here -->
+    </div>
+
+    <div class="footer">
+      <div>© <span id="year"></span> ReelSecrets</div>
+      <div class="small">Firebase Hosting + Firestore (preview feed). Payments/premium unlock comes next.</div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- Firebase (Modular v9+) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signInWithPopup,
+      GoogleAuthProvider,
+      signOut,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+    import {
+      getFirestore,
+      collection,
+      query,
+      orderBy,
+      limit,
+      getDocs
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    // ✅ STEP 1: Paste your Firebase web app config here (from Firebase Console → Project settings → Your apps)
+    const firebaseConfig = {
+      apiKey: "PASTE_YOUR_API_KEY",
+      authDomain: "PASTE_YOUR_AUTH_DOMAIN",
+      projectId: "PASTE_YOUR_PROJECT_ID",
+      storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
+      messagingSenderId: "PASTE_YOUR_SENDER_ID",
+      appId: "PASTE_YOUR_APP_ID"
+    };
+
+    // If config not set, page still works with demo cards.
+    const configLooksReal = !Object.values(firebaseConfig).some(v => String(v).includes("PASTE_"));
+
+    const els = {
+      statusPill: document.getElementById("statusPill"),
+      btnLogin: document.getElementById("btnLogin"),
+      btnGoogle: document.getElementById("btnGoogle"),
+      btnLogout: document.getElementById("btnLogout"),
+      btnCreateAccount: document.getElementById("btnCreateAccount"),
+      btnLearn: document.getElementById("btnLearn"),
+      btnRefresh: document.getElementById("btnRefresh"),
+      grid: document.getElementById("grid"),
+      toast: document.getElementById("toast"),
+      year: document.getElementById("year"),
+    };
+
+    els.year.textContent = new Date().getFullYear();
+
+    function toast(msg){
+      els.toast.textContent = msg;
+      els.toast.style.display = "block";
+      clearTimeout(window.__t);
+      window.__t = setTimeout(()=> els.toast.style.display="none", 2400);
+    }
+
+    function escapeHtml(s){
+      return String(s ?? "").replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[c]));
+    }
+
+    function skeletonCards(n=6){
+      els.grid.innerHTML = "";
+      for(let i=0;i<n;i++){
+        const d = document.createElement("div");
+        d.className = "card vid";
+        d.innerHTML = `
+          <div class="thumb skeleton"></div>
+          <div class="meta">
+            <div class="skeleton" style="height:14px;border-radius:10px;width:72%;"></div>
+            <div style="height:10px"></div>
+            <div class="skeleton" style="height:10px;border-radius:10px;width:56%;"></div>
+            <div style="height:12px"></div>
+            <div class="skeleton" style="height:36px;border-radius:12px;width:100%;"></div>
+          </div>
+        `;
+        els.grid.appendChild(d);
+      }
+    }
+
+    function renderCards(items){
+      els.grid.innerHTML = "";
+      if (!items.length){
+        els.grid.innerHTML = `<div class="small" style="color:var(--muted)">No previews yet. Add docs to Firestore collection <b>previews</b>.</div>`;
+        return;
+      }
+
+      items.forEach(item => {
+        const title = escapeHtml(item.title || "Untitled Preview");
+        const creator = escapeHtml(item.creatorName || "Creator");
+        const state = escapeHtml(item.state || "—");
+        const species = escapeHtml(item.species || "—");
+        const price = Number(item.price || 0).toFixed(2);
+        const previewUrl = item.previewUrl || "";
+        const locked = item.isPremium === true;
+
+        const card = document.createElement("div");
+        card.className = "card vid";
+
+        card.innerHTML = `
+          <div class="thumb">
+            <div class="badge ${locked ? "locked" : ""}">${locked ? "Premium Unlock" : "Preview"}</div>
+            ${
+              previewUrl
+                ? `<video src="${escapeHtml(previewUrl)}" muted playsinline preload="metadata"></video>`
+                : `<div class="small" style="color:var(--muted)">No previewUrl provided</div>`
+            }
+          </div>
+          <div class="meta">
+            <h4>${title}</h4>
+            <div class="sub">
+              <span>By <b>${creator}</b></span>
+              <span>•</span>
+              <span>${state}</span>
+              <span>•</span>
+              <span>${species}</span>
+            </div>
+
+            <div class="row">
+              <div class="price">${locked ? "$" + price : "Free"}</div>
+              <button class="btn ${locked ? "primary" : ""}" data-action="${locked ? "unlock" : "watch"}">
+                ${locked ? "Unlock" : "Watch preview"}
+              </button>
+            </div>
+
+            <div class="small" style="margin-top:10px">
+              ${locked ? "Includes: full video + off-YouTube breakdown" : "Public teaser clip"}
+            </div>
+          </div>
+        `;
+
+        // Video hover play (nice polish)
+        const video = card.querySelector("video");
+        if (video){
+          card.addEventListener("mouseenter", () => { video.play().catch(()=>{}); });
+          card.addEventListener("mouseleave", () => { video.pause(); video.currentTime = 0; });
+          card.addEventListener("touchstart", () => { video.play().catch(()=>{}); }, {passive:true});
+        }
+
+        // Button action placeholder
+        card.querySelector("button")?.addEventListener("click", () => {
+          if (locked){
+            toast("Next step: add payments + premium unlock (Stripe).");
+          } else {
+            toast("Preview playback is inline. Upload more previews to Firestore.");
+          }
+        });
+
+        els.grid.appendChild(card);
+      });
+    }
+
+    // Demo fallback (if Firebase config isn’t pasted yet)
+    const demo = [
+      { title:"Ice Edge Walleyes (Teaser)", creatorName:"NorthWoods Angler", state:"WI", species:"Walleye", isPremium:false, previewUrl:"" },
+      { title:"Dock Skipping Bass (Premium)", creatorName:"LakePro", state:"MN", species:"Largemouth", isPremium:true, price:4.99, previewUrl:"" },
+      { title:"River Smallies Pattern (Premium)", creatorName:"CurrentKings", state:"IA", species:"Smallmouth", isPremium:true, price:6.00, previewUrl:"" },
+    ];
+
+    let app, auth, db;
+
+    async function loadPreviews(){
+      skeletonCards(6);
+
+      if (!configLooksReal){
+        // No Firebase config yet → show demo cards
+        setTimeout(()=> renderCards(demo), 250);
+        els.statusPill.textContent = "Paste Firebase config to go live";
+        return;
+      }
+
+      try{
+        app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+
+        els.statusPill.textContent = "Connected to Firebase";
+
+        // Pull newest previews
+        const q = query(collection(db, "previews"), orderBy("createdAt", "desc"), limit(12));
+        const snap = await getDocs(q);
+        const items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderCards(items);
+
+        // Watch auth state
+        onAuthStateChanged(auth, (user) => {
+          if (user){
+            els.btnLogin.style.display = "none";
+            els.btnGoogle.style.display = "none";
+            els.btnLogout.style.display = "inline-flex";
+            els.statusPill.textContent = `Logged in: ${user.email || "Google user"}`;
+          } else {
+            els.btnLogin.style.display = "inline-flex";
+            els.btnGoogle.style.display = "inline-flex";
+            els.btnLogout.style.display = "none";
+            if (configLooksReal) els.statusPill.textContent = "Connected to Firebase";
+          }
+        });
+
+      } catch (e){
+        console.error(e);
+        renderCards(demo);
+        els.statusPill.textContent = "Firebase error (check config)";
+        toast("Firebase error — check your config in index.html");
+      }
+    }
+
+    // Auth UI (simple prompts so it works on mobile with zero extra pages)
+    async function emailLoginFlow(){
+      if (!auth){
+        toast("Paste Firebase config first.");
+        return;
+      }
+      const email = prompt("Email:");
+      if (!email) return;
+      const pass = prompt("Password (6+ chars):");
+      if (!pass) return;
+
+      try{
+        await signInWithEmailAndPassword(auth, email, pass);
+        toast("Logged in.");
+      } catch (e){
+        // If user doesn't exist, create them (simple onboarding)
+        if (String(e?.code).includes("auth/user-not-found")){
+          try{
+            await createUserWithEmailAndPassword(auth, email, pass);
+            toast("Account created & logged in.");
+          } catch (e2){
+            console.error(e2);
+            toast(e2?.message || "Could not create account.");
+          }
+        } else {
+          console.error(e);
+          toast(e?.message || "Login failed.");
+        }
+      }
+    }
+
+    async function googleLogin(){
+      if (!auth){
+        toast("Paste Firebase config first.");
+        return;
+      }
+      try{
+        const provider = new GoogleAuthProvider();
+        await signInWithPopup(auth, provider);
+        toast("Logged in with Google.");
+      } catch (e){
+        console.error(e);
+        toast(e?.message || "Google login failed.");
+      }
+    }
+
+    async function logout(){
+      if (!auth) return;
+      await signOut(auth);
+      toast("Logged out.");
+    }
+
+    els.btnLogin.addEventListener("click", emailLoginFlow);
+    els.btnCreateAccount.addEventListener("click", emailLoginFlow);
+    els.btnGoogle.addEventListener("click", googleLogin);
+    els.btnLogout.addEventListener("click", logout);
+    els.btnRefresh.addEventListener("click", loadPreviews);
+
+    els.btnLearn.addEventListener("click", () => {
+      toast("Premium = full video + details creators avoid posting on YouTube (spots, patterns, setups, timing).");
+    });
+
+    // Start
+    loadPreviews();
+  </script>
+</body>
+</html>
